@@ -9,10 +9,14 @@ export default class CoinList extends Component {
     coins: PropTypes.array.isRequired
   };
 
-  keyExtractor = (item, index) => index;
+  keyExtractor = (item, index) => index.toString();
 
   renderItem = ({ item }) => (
-    <ListItem title={item.id} subtitle={item.description} />
+    <ListItem
+      title={item.name}
+      subtitle={item.price}
+      onPress={() => console.log(item.name)}
+    />
   );
 
   render() {

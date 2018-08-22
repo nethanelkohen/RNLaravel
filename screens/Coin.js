@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import ajax from '../services/FetchCoins';
 import CoinList from '../components/CoinList';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#B6A6BB'
-  }
-});
+const URI = 'http://localhost:8000';
 
-export class Coin extends Component {
+class Coin extends Component {
   state = {
     coins: []
   };
 
   async componentDidMount() {
-    const coins = await ajax.fetchCoins();
+    let response = await fetch(URI + '/coins');
+    let coins = await response.json();
     this.setState({ coins });
   }
 
@@ -30,5 +24,13 @@ export class Coin extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#B6A6BB'
+  }
+});
 
 export default Coin;
